@@ -1,5 +1,3 @@
-![image](https://github.com/user-attachments/assets/88975ced-4e2f-4c54-bdca-413cbcb969c5)
-
 ## Introduction to EC2:
 
 What is EC2, and why is it important?

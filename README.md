@@ -1,8 +1,6 @@
 # AWS_Notes
 
-<a href="[https://example.com](https://coggle.it/diagram/ZNyWdlpO0W45uyGP/t/star-fundamental-aws-concepts-star/e32b8f30645ef1e3ac58b95a70c8eeeff3d0f53796c601930f3752cae1f959e6)">
-    <img src="" alt="AWS Syllabus and workflow" width="200">
-</a>
+<a href="[https://example.com](https://coggle.it/diagram/ZNyWdlpO0W45uyGP/t/star-fundamental-aws-concepts-star/e32b8f30645ef1e3ac58b95a70c8eeeff3d0f53796c601930f3752cae1f959e6)" target="_blank">AWS Roadmap</a>
 
 AWS zero to hero in 30 days,
 

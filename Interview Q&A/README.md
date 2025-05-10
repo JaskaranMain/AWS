@@ -1,131 +1,86 @@
-📘 Scenario-Based Interview Questions on EC2, IAM, and VPC
-This document contains a collection of practical, scenario-based interview questions and answers focused on AWS services such as EC2, IAM, and VPC. Useful for job interviews, revision, and hands-on AWS learning.
+# Scenario Based Interview Questions on EC2, IAM and VPC
 
-📌 Table of Contents
-1. VPC Architecture for a 2-Tier Application
+### Q: You have been assigned to design a VPC architecture for a 2-tier application. The application needs to be highly available and scalable. How would you design the VPC architecture?
 
-2. Restricting Outbound Internet Access
+**A:**  
+I would create 2 subnets: public and private. The public subnet would contain the load balancers and be accessible from the internet. The private subnet would host the application servers.  
+I would distribute the subnets across multiple Availability Zones for high availability. Additionally, I would configure auto scaling groups for the application servers.
 
-3. Internet Access for Private Subnet Instances
+---
 
-4. EC2 Private Communication
+### Q: Your organization has a VPC with multiple subnets. You want to restrict outbound internet access for resources in one subnet, but allow outbound internet access for resources in another subnet. How would you achieve this?
 
-5. Implementing Network Access Control
+**A:**  
+Modify the route table associated with the restricted subnet by removing the default route (0.0.0.0/0) pointing to the internet gateway.  
+For the other subnet, retain the route to the internet gateway.
 
-6. Isolated Environment for Sensitive Workloads
+---
 
-7. Secure Access to AWS Services from VPC
+### Q: You have a VPC with a public subnet and a private subnet. Instances in the private subnet need to access the internet for software updates. How would you allow internet access for instances in the private subnet?
 
-8. NACLs vs Security Groups
+**A:**  
+Use a NAT Gateway or NAT instance in the public subnet.  
+Update the private subnet’s route table to direct internet-bound traffic to the NAT Gateway/instance.
 
-9. IAM Users, Groups, Roles, and Policies
+---
 
-10. Bastion Host Setup
+### Q: You have launched EC2 instances in your VPC, and you want them to communicate with each other using private IP addresses. What steps would you take to enable this communication?
 
-1. VPC Architecture for a 2-Tier Application
-Q: How would you design a VPC architecture for a 2-tier application that is highly available and scalable?
+**A:**  
+Ensure the instances are in the same VPC.  
+Place them in the same subnet or ensure peering between subnets.  
+Check security group rules to allow communication via required ports/protocols.
 
-A:
+---
 
-Create a VPC with public and private subnets.
+### Q: You want to implement strict network access control for your VPC resources. How would you achieve this?
 
-Place load balancers in the public subnet.
+**A:**  
+Use Network Access Control Lists (NACLs) at the subnet level to define inbound/outbound rules.  
+Configure source/destination IPs, ports, and protocols to enforce access control.
 
-Deploy application servers in private subnets.
+---
 
-Distribute subnets across multiple Availability Zones.
+### Q: Your organization requires an isolated environment within the VPC for running sensitive workloads. How would you set up this isolated environment?
 
-Use Auto Scaling groups for the application servers for scalability.
+**A:**  
+Create a subnet with no route to an internet gateway—this is an isolated subnet.  
+Place sensitive workloads there.  
+If outbound access is needed, use a NAT Gateway/instance via another subnet.
 
-2. Restricting Outbound Internet Access
-Q: How can you restrict outbound internet access for one subnet but allow it for another?
+---
 
-A:
+### Q: Your application needs to access AWS services, such as S3 securely within your VPC. How would you achieve this?
 
-Modify the route table for the restricted subnet: remove the route to the internet gateway (0.0.0.0/0).
+**A:**  
+Use VPC Endpoints (interface or gateway) for services like S3 or DynamoDB.  
+This enables private, secure access without routing through the internet.
 
-Retain the internet gateway route for the subnet that requires outbound internet access.
+---
 
-3. Internet Access for Private Subnet Instances
-Q: How can instances in a private subnet access the internet for software updates?
+### Q: What is the difference between NACL and Security Groups? Explain with a use case.
 
-A:
+**A:**  
+- NACLs: Stateless, operate at the subnet level, good for broader rules.  
+- Security Groups: Stateful, operate at instance level, good for detailed controls.  
+Use both together to implement layered security—NACLs for subnet-wide restrictions, security groups for instance-specific rules.
 
-Use a NAT Gateway or NAT instance in a public subnet.
+---
 
-Update the private subnet's route table to direct internet-bound traffic to the NAT resource.
+### Q: What is the difference between IAM Users, Groups, Roles, and Policies?
 
-4. EC2 Private Communication
-Q: How can EC2 instances communicate privately?
+**A:**  
+- **IAM User**: Represents a person or app with credentials.  
+- **IAM Group**: Collection of IAM Users. Permissions are attached to groups.  
+- **IAM Role**: Used to delegate access, assumed temporarily by users/services.  
+- **IAM Policy**: JSON document that defines permissions. Attached to Users, Groups, or Roles.
 
-A:
+---
 
-Launch instances in the same VPC (same or peered subnets).
+### Q: You have a private subnet in your VPC that contains instances with no direct internet access. However, you need to securely access these instances for administrative purposes. How would you set up a bastion host?
 
-Ensure security group rules allow inbound/outbound private IP traffic between the instances.
-
-5. Implementing Network Access Control
-Q: How would you implement strict access control at the subnet level?
-
-A:
-
-Use Network ACLs (NACLs) for stateless control at the subnet level.
-
-Configure specific inbound and outbound rules based on IPs, ports, and protocols.
-
-6. Isolated Environment for Sensitive Workloads
-Q: How do you create an isolated subnet for sensitive workloads?
-
-A:
-
-Create a subnet without an internet gateway.
-
-Place sensitive instances in this isolated subnet.
-
-Optionally, route outbound traffic through a NAT Gateway in another subnet for controlled updates.
-
-7. Secure Access to AWS Services from VPC
-Q: How to allow VPC instances secure access to services like S3?
-
-A:
-
-Use VPC Endpoints (interface or gateway type depending on the service).
-
-Allows private communication with AWS services, bypassing the internet.
-
-8. NACLs vs Security Groups
-Q: What is the difference between NACL and Security Groups? Use a scenario.
-
-A:
-
-NACLs: Stateless, work at the subnet level. Example: block all traffic from a specific IP range.
-
-Security Groups: Stateful, work at the instance level. Example: only allow HTTP traffic to a web server.
-
-Use both for layered security (defense-in-depth).
-
-9. IAM Users, Groups, Roles, and Policies
-Q: What’s the difference between IAM users, groups, roles, and policies?
-
-A:
-
-User: Individual identity with credentials.
-
-Group: Collection of users managed together.
-
-Role: Temporary access assumed by users/services.
-
-Policy: JSON document that defines permissions.
-
-10. Bastion Host Setup
-Q: How do you access private subnet instances securely?
-
-A:
-
-Launch a bastion host in a public subnet with a public IP.
-
-Allow SSH (Linux) or RDP (Windows) to the bastion host from trusted IPs.
-
-Configure private instance security groups to allow traffic from the bastion host's security group.
-
-SSH or RDP into private instances via the bastion.
+**A:**  
+- Launch a bastion host EC2 instance in a public subnet with a public IP.  
+- Allow inbound SSH/RDP only from trusted IPs.  
+- Allow inbound traffic from the bastion host security group to private instances.  
+- Connect to the bastion, then use it to SSH/RDP into private instances.

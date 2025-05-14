@@ -22,8 +22,7 @@ Policies: IAM policies are JSON documents that define permissions. Policies spec
 
 aws-devops-zero-to-hero/day-2 at main · iam-veeramalla/aws-devops-zero-to-hero 
 
-##INTERVIEW QUESTIONS
-# AWS Identity and Access Management (IAM) FAQ
+# AWS Identity and Access Management (IAM) FAQ/INTERVIEW QUESTIONS
 
 ## Q: What is AWS Identity and Access Management (IAM)?
 **A:** AWS Identity and Access Management (IAM) is a web service provided by AWS that allows secure control over access to AWS services and resources. It enables you to manage users, groups, roles, and permissions, ensuring secure delegation of access.

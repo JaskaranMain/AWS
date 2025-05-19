@@ -1,4 +1,4 @@
-## AWS Cloud Infrastruture deployment aechitecture
+## AWS Cloud Infrastruture deployment architecture
 
 ![Screenshot 2025-05-19 092819](https://github.com/user-attachments/assets/9b269b1c-4d95-4818-a706-935173b78929)
 
